@@ -1,0 +1,125 @@
+.card {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.045);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(74, 143, 197, 0.5);
+}
+
+.tall {
+  grid-row: span 2;
+}
+
+.country {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  color: #4a8fc5;
+  background: rgba(10, 20, 45, 0.75);
+  border: 1px solid rgba(74, 143, 197, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+.avatarWrap {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #6baed6;
+  letter-spacing: 2px;
+}
+
+.info {
+  width: 100%;
+  padding: 10px 14px 14px;
+  background: linear-gradient(to top, rgba(8, 16, 35, 0.95) 0%, rgba(8, 16, 35, 0.7) 100%);
+  flex-shrink: 0;
+}
+
+.role {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #4a8fc5;
+  margin: 0 0 5px;
+  font-weight: 600;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 20, 45, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.oRole {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #4a8fc5;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.oName {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.oBio {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
