@@ -1,17 +1,17 @@
 .main {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #0a0f1e 0%, #1a2744 50%, #0d1b35 100%);
+  background: #0a0e1a;
   padding: 64px 40px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: 64px;
   overflow: hidden;
 }
 
 .left {
-  flex: 0 0 260px;
+  flex: 0 0 300px;
   display: flex;
   flex-direction: column;
 }
@@ -20,12 +20,13 @@
   font-size: 10px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #4a7fa5;
-  margin-bottom: 14px;
+  color: #ffffff;
+  opacity: 0.5;
+  margin-bottom: 16px;
 }
 
 .heading {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.2;
@@ -33,15 +34,15 @@
 }
 
 .heading span {
-  color: #4a7fa5;
+  color: #ffffff;
   display: block;
 }
 
 .desc {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.55);
-  line-height: 1.7;
-  margin-bottom: 20px;
+  line-height: 1.8;
+  margin-bottom: 24px;
 }
 
 .bullets {
@@ -54,7 +55,7 @@
 
 .bullets li {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -62,15 +63,15 @@
 
 .bullets li::before {
   content: "";
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: #4a7fa5;
+  background: #ffffff;
+  opacity: 0.5;
   flex-shrink: 0;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
-/* ── Scroll container ── */
 .right {
   flex: 1;
   height: 100vh;
@@ -104,24 +105,46 @@
 }
 
 @keyframes scrollUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
 
+/* Tablet */
 @media (max-width: 1024px) {
   .main {
     flex-direction: column;
+    align-items: flex-start;
+    padding: 48px 24px;
     overflow-y: auto;
+    min-height: 100vh;
+  }
+  .left {
+    flex: unset;
+    width: 100%;
   }
   .right {
-    height: 500px;
     width: 100%;
+    height: 500px;
   }
   .scrollTrack {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .main {
+    padding: 32px 16px;
+    gap: 32px;
+  }
+  .heading {
+    font-size: 1.7rem;
+  }
+  .right {
+    height: 420px;
+  }
+  .scrollTrack {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 130px;
   }
 }
