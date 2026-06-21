@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "6Degrees website, our team",
+  title: "6Degrees Technologies Team",
   description: "Meet the team behind 6Degrees Technologies.",
 };
 

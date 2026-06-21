@@ -4,8 +4,8 @@ type TeamCardProps = {
   name: string;
   title: string;
   bio: string;
-  tall?: boolean;
   photo: string | null;
+  tall?: boolean;
 };
 
 function getInitials(name: string): string {
@@ -17,11 +17,15 @@ function getInitials(name: string): string {
     .slice(0, 2);
 }
 
-export default function TeamCard({ name, title, bio, tall, photo }: TeamCardProps) {
+export default function TeamCard({
+  name,
+  title,
+  bio,
+  photo,
+  tall,
+}: TeamCardProps) {
   return (
     <div className={`${styles.card} ${tall ? styles.tall : ""}`}>
-      
-
       <div className={styles.avatarWrap}>
         {photo ? (
           <img src={photo} alt={name} className={styles.photo} />
