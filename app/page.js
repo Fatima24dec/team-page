@@ -1,5 +1,1 @@
-import { redirect } from "next/navigation";
-
-export default function Home() {
-  redirect("/team");
-}
+export { default } from "@/app/team/page";
