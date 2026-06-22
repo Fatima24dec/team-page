@@ -2,6 +2,7 @@ import teamMembers from "@/data/team.json";
 import TeamCard from "@/components/TeamCard";
 import styles from "./team.module.css";
 
+
 type Member = {
   id: number;
   name: string;
