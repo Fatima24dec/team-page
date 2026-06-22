@@ -167,8 +167,10 @@
   will-change: transform;
 }
 
-.marquee:hover .track {
-  animation-play-state: paused;
+@media (hover: hover) {
+  .marquee:hover .track {
+    animation-play-state: paused;
+  }
 }
 
 .col {
