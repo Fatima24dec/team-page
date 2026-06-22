@@ -181,3 +181,20 @@
   .name     { font-size: 11px; }
   .role     { font-size: 8px; }
 }
+
+.tapped .overlay {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .card:hover .overlay {
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  .card:hover .overlay {
+    opacity: 0;
+  }
+}
+
