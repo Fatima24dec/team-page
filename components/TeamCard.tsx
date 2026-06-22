@@ -1,3 +1,5 @@
+"use client";
+import { useState, useRef, useEffect } from "react";
 import styles from "./TeamCard.module.css";
 
 type TeamCardProps = {
@@ -24,8 +26,43 @@ export default function TeamCard({
   photo,
   tall,
 }: TeamCardProps) {
+  const [tapped, setTapped] = useState(false);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!tapped) return;
+
+    const handleOutside = (e: TouchEvent) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setTapped(false);
+      }
+    };
+
+    document.addEventListener("touchstart", handleOutside);
+    return () => document.removeEventListener("touchstart", handleOutside);
+  }, [tapped]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = Math.abs(e.changedTouches[0].clientX - touchStartX.current);
+    const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current);
+    if (dx > 10 || dy > 10) return;
+    setTapped((prev) => !prev);
+  };
+
   return (
-    <div className={`${styles.card} ${tall ? styles.tall : ""}`}>
+    <div
+      ref={cardRef}
+      className={`${styles.card} ${tall ? styles.tall : ""} ${tapped ? styles.tapped : ""}`}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={styles.avatarWrap}>
         {photo ? (
           <img src={photo} alt={name} className={styles.photo} />
