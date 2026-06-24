@@ -1,8 +1,8 @@
 [
-  { "id": 1, "name": "Atheer Al-Otaibi",    "title": "Managing Director",   "bio": "Leads the company and oversees all business operations.",      "tall": true,  "photo": "/images/ww.png" },
-  { "id": 2, "name": "Abdullah Al-Aidroos", "title": "Full Stack Developer", "bio": "Develops and maintains web applications and systems.",           "tall": false, "photo": "/images/mn.png" },
-  { "id": 3, "name": "Omar valki",          "title": "UI/UX Designer",       "bio": "Designs user-friendly and engaging digital experiences.",        "tall": false, "photo": "/images/man.png" },
-  { "id": 4, "name": "Abdullah Omar",       "title": "IT Help Desk",         "bio": "Provides technical support and helps solve IT issues.",           "tall": true,  "photo": "/images/m.png" },
-  { "id": 5, "name": "Fahad Al-Oqaidi",    "title": "IT Associate",          "bio": "Contributes to IT projects and technology solutions.",            "tall": false, "photo": "/images/mm.png" },
-  { "id": 6, "name": "Fatima Al-Ibrahim",  "title": "Intern",                "bio": "Assists with IT tasks and gains hands-on experience.",            "tall": false, "photo": "/images/w1.png" }
+  { "id": 1, "name": "Atheer Al-Otaibi",    "title": "Managing Director",   "bio": "Leads the company and oversees all business operations.",      "tall": true,  "photo": "/team-page/images/ww.png" },
+  { "id": 2, "name": "Abdullah Al-Aidroos", "title": "Full Stack Developer", "bio": "Develops and maintains web applications and systems.",           "tall": false, "photo": "/team-page/images/mn.png" },
+  { "id": 3, "name": "Omar valki",          "title": "UI/UX Designer",       "bio": "Designs user-friendly and engaging digital experiences.",        "tall": false, "photo": "/team-page/images/man.png" },
+  { "id": 4, "name": "Abdullah Omar",       "title": "IT Help Desk",         "bio": "Provides technical support and helps solve IT issues.",           "tall": true,  "photo": "/team-page/images/m.png" },
+  { "id": 5, "name": "Fahad Al-Oqaidi",    "title": "IT Associate",          "bio": "Contributes to IT projects and technology solutions.",            "tall": false, "photo": "/team-page/images/mm.png" },
+  { "id": 6, "name": "Fatima Al-Ibrahim",  "title": "Intern",                "bio": "Assists with IT tasks and gains hands-on experience.",            "tall": false, "photo": "/team-page/images/w1.png" }
 ]
