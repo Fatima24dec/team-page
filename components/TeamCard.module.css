@@ -1,200 +1,137 @@
 /* ============================================
-   CARD
+   CARD WRAPPER — بدون حدود موحدة
 ============================================ */
 .card {
   --card-w: 200px;
-  --card-h: 200px;
-  --card-h-tall: 320px;
+  --photo-h: 240px;
 
   position: relative;
   width: var(--card-w);
-  height: var(--card-h);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: linear-gradient(180deg, #010822 0%, #010822 100%);
-  overflow: hidden;
-  cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
-  transition:
-    border-color 0.4s ease,
-    transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
-    box-shadow 0.4s ease;
-}
-
-.tall {
-  height: var(--card-h-tall);
-}
-
-.card:hover {
-  border-color: rgba(110, 168, 214, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
 }
 
 /* ============================================
-   AVATAR
+   AVATAR BOX — صندوق الصورة لحاله، بحدوده الخاصة
 ============================================ */
 .avatarWrap {
   width: 100%;
-  height: 100%;
+  height: var(--photo-h);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   overflow: hidden;
-  background: linear-gradient(180deg, #1f2a4d 0%, #16203d 100%);
+  background: #010822;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.figmaBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  z-index: 0;
 }
 
 .photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
+  z-index: 1;
 }
 
 .initials {
-  font-size: 52px;
+  position: relative;
+  z-index: 1;
+  font-size: 44px;
   font-weight: 700;
-  color: #010822;
-  letter-spacing: 3px;
+  color: #d66e6e;
+}
+
+/* تدرج أزرق خفيف بأسفل الصورة فقط */
+.avatarWrap::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    to top,
+    rgba(74, 127, 197, 0.35) 0%,
+    rgba(74, 127, 197, 0.12) 55%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* ============================================
-   INFO (bottom overlay)
+   INFO — منفصل تمامًا عن صندوق الصورة
 ============================================ */
 .info {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 50px 14px 14px;
-  height: 55%;
+  padding: 14px 4px 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(10, 14, 26, 0.6) 60%,
-    rgba(10, 14, 26, 0.97) 100%
-  );
-}
-
-.role {
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(151, 155, 197, 0.911);
-  margin: 0 0 4px;
+  background: transparent;
 }
 
 .name {
-  font-size: 13px;
-  font-weight: 400;
-  color: #fff;
-  margin: 0;
-}
-
-/* ============================================
-   HOVER OVERLAY
-============================================ */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 14, 26, 0.94);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 3;
-}
-
-.card:hover .overlay {
-  opacity: 1;
-}
-
-.oRole {
   font-family: "Mona-Sans Regular", sans-serif;
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #4a7fa5;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
   margin: 0 0 8px;
-  
 }
 
-.oName {
-  font-family: "Mona-Sans Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 100;
-  color: #fff;
-  margin: 0 0 12px;
-}
-
-.oBio {
+.role {
   font-family: "Mona-Sans Regular", sans-serif;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.466);
-  line-height: 1.7;
-  margin: 0;
-  
+  font-weight: 500;
+  color:  rgba(255,255,255,0.6);;
+  margin: 0 0 10px;
 }
 
-
+.bio {
+  font-family: "Mona-Sans Regular", sans-serif;
+  font-size: 11.5px;
+  color: #cfc6c6ec;
+  line-height: 1.6;
+  margin: 0;
+}
 
 /* ============================================
    RESPONSIVE
 ============================================ */
-
-/* Large desktop (≥1400) */
 @media (min-width: 1400px) {
-  .card {
-    --card-w: 220px;
-    --card-h: 220px;
-    --card-h-tall: 360px;
-  }
-  .initials { font-size: 60px; }
+  .card { --card-w: 220px; --photo-h: 260px; }
+  .initials { font-size: 48px; }
 }
 
-/* Tablet (≤1023) — 2 columns */
 @media (max-width: 1023px) {
-  .card {
-    --card-w: 160px;
-    --card-h: 190px;
-    --card-h-tall: 300px;
-  }
-  .initials { font-size: 40px; }
+  .card { --card-w: 160px; --photo-h: 190px; }
+  .initials { font-size: 34px; }
+  .name { font-size: 13px; }
+  .bio { font-size: 10px; }
 }
 
-/* Mobile (≤767) — 1 column */
 @media (max-width: 767px) {
-  .card {
-    --card-w: 130px;
-    --card-h: 160px;
-    --card-h-tall: 250px;
-  }
-  .initials { font-size: 32px; }
-  .name     { font-size: 11px; }
-  .role     { font-size: 8px; }
+  .card { --card-w: 140px; --photo-h: 165px; }
+  .initials { font-size: 26px; }
+  .name { font-size: 12px; }
+  .role { font-size: 9px; }
+  .bio { font-size: 9px; }
 }
-
-.tapped .overlay {
-  opacity: 1;
-}
-
-@media (hover: hover) {
-  .card:hover .overlay {
-    opacity: 1;
-  }
-}
-
-@media (hover: none) {
-  .card:hover .overlay {
-    opacity: 0;
-  }
-}
-

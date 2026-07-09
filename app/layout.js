@@ -1,3 +1,5 @@
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,14 +14,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "6Degrees Technologies Team",
-  description: "Meet the team behind 6Degrees Technologies.",
+  title: "6 Degrees Technologies Team",
+  description: "Meet the team behind 6 Degrees Technologies.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

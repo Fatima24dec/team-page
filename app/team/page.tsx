@@ -1,85 +1,120 @@
+"use client";
+
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import teamMembers from "@/data/team.json";
 import TeamCard from "@/components/TeamCard";
 import styles from "./team.module.css";
-
+import {useEffect, useState} from 'react';
+import { teamService } from "@/services/team";
 
 type Member = {
   id: number;
   name: string;
   title: string;
   bio: string;
-  tall: boolean;
   photo: string | null;
 };
 
 export default function TeamPage() {
+  const t = useTranslations();
+  const locale = useLocale();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [switching, setSwitching] = useState(false);
+
   const members = teamMembers as Member[];
+  const loopMembers = [...members, ...members];
 
-  const pairs: Member[][] = [];
-  for (let i = 0; i < members.length; i += 2) {
-    pairs.push([members[i], members[i + 1]].filter(Boolean));
+  async function switchLocale() {
+    setSwitching(true);
+    const newLocale = locale === "en" ? "ar" : "en";
+    await fetch("/api/set-locale", {
+      method: "POST",
+      body: JSON.stringify({ locale: newLocale }),
+      headers: { "Content-Type": "application/json" },
+    });
+    startTransition(() => {
+      router.refresh();
+      setSwitching(false);
+    });
   }
+useEffect(() => {
+    const fetchTeams = async () => {
+        try {
+            const response = await teamService.getTeams();
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-  const loop = [...Array(8)].flatMap(() => pairs);
-
+    fetchTeams();
+}, []);
   return (
-    <main className={styles.main}>
+    <main className={styles.main} dir={locale === "ar" ? "rtl" : "ltr"}>
 
-      {/* HEADER */}
+      {/* Loading Overlay */}
+      {switching && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.spinner}></div>
+        </div>
+      )}
+
+{/* HEADER */}
       <header className={styles.header}>
-        <img
-          src="https://6degrees.com.sa/assets/imgs/logo-light.png"
-          alt="6Degrees Logo"
-          className={styles.logo}
-        />
-        <div className={styles.right}>
-          <button className={styles.lang}>العربية</button>
-          <button className={styles.menu} aria-label="menu">
-            <span className={styles.icon}>
-              <i></i>
-              <i></i>
-            </span>
-          </button>
+        <div className={styles.headerInner}>
+          <img
+            src="https://6degrees.com.sa/assets/imgs/logo-light.png"
+            alt="6Degrees Logo"
+            className={styles.logo}
+          />
+
+          <div className={styles.right}>
+            <button
+              className={styles.lang}
+              onClick={switchLocale}
+              disabled={isPending || switching}
+            >
+              {t("nav.lang")}
+            </button>
+            <button
+              className={styles.loginBtn}
+              onClick={() => router.push("http://localhost:8000/login")}
+            >
+              {t("nav.login")}
+            </button>
+          </div>
         </div>
       </header>
 
       {/* CONTENT */}
       <div className={styles.layout}>
-
         <div className={styles.left}>
-          <h1 className={styles.heading}>The Minds Behind</h1>
-          <p className={styles.description}>Turning ideas into digital experiences.</p>
+
+          <h1 className={styles.heading}>{t("hero.heading")}</h1>
+          <p className={styles.description}>{t("hero.description")}</p>
         </div>
 
         <div className={styles.marquee}>
-          <div className={styles.track}>
-            {loop.map((pair, colIdx) => {
-              const topIsTall = colIdx % 2 === 0;
-              return (
-                <div key={colIdx} className={styles.col}>
-                  {pair.map((m, i) => (
-                    <TeamCard
-                      key={`${colIdx}-${i}-${m.id}`}
-                      name={m.name}
-                      title={m.title}
-                      bio={m.bio}
-                      photo={m.photo}
-                      tall={i === 0 ? topIsTall : !topIsTall}
-                    />
-                  ))}
-                </div>
-              );
-            })}
+          <div className={locale === "ar" ? styles.trackRtl : styles.track}>
+            {loopMembers.map((m, i) => (
+              <TeamCard
+                key={`${m.id}-${i}`}
+                name={m.name}
+                title={m.title}
+                bio={m.bio}
+                photo={m.photo}
+              />
+            ))}
           </div>
         </div>
-
       </div>
 
       {/* FOOTER */}
       <footer className={styles.footer}>
-        <p className={styles.footerText}>
-          All rights reserved © 6 Degrees Technologies Co. 2024.
-        </p>
+        <p className={styles.footerText}>{t("footer.text")}</p>
       </footer>
 
     </main>

@@ -7,7 +7,7 @@
   width: 100%;
   background: var(--page-bg);
   color: #fff;
-  overflow: hidden;
+  overflow-x: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -17,10 +17,7 @@
    HEADER
 ============================================ */
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 48px;
+  padding: 20px 0;
   box-sizing: border-box;
   position: relative;
   z-index: 10;
@@ -28,6 +25,16 @@
   background: #010822;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+.headerInner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -57,13 +64,6 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.menu {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-
 .icon {
   display: flex;
   flex-direction: column;
@@ -78,99 +78,107 @@
   display: block;
 }
 
-/* ============================================
-   LAYOUT — mobile 
-============================================ */
-.layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  padding: 48px 24px 24px;
-  gap: 40px;
-  box-sizing: border-box;
-  flex: 1;
+/* زر Login */
+.loginBtn {
+  padding: 8px 24px;
+  border: none;
+  font-family: 'mona-sans regular', sans-serif;
+  border-radius: 50px;
+  background: #fff;
+  color: #010822;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
 
+.loginBtn:hover {
+  opacity: 0.85;
+}
+
+.left {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding-left: clamp(24px, 5vw, 56px);
+  padding-right: clamp(24px, 5vw, 56px);
+  box-sizing: border-box;
+  font-family: "Mona-Sans Regular", sans-serif;
+  font-weight: 400;
+  position: relative;
+  z-index: 3;
+  text-align: start;
+}
+/* ============================================
+   LAYOUT — نص فوق، كاردات تحت، بدون تمدد فارغ
+============================================ */
+.layout {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(48px, 8vw, 96px) clamp(24px, 5vw, 56px) clamp(48px, 6vw, 80px);
+  gap: clamp(40px, 6vw, 72px);
+  box-sizing: border-box;
+  align-items: flex-start; /* أضيفي هذا */
+}
 /* ============================================
    LEFT (TEXT)
 ============================================ */
-.left {
-  font-family: "Mona-Sans Regular", sans-serif;
-  font-weight: 400;
-  font-size: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-right: 0;
-  max-width: 100%;
-  position: relative;
-  z-index: 3;
-}
 
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #fff;
-  margin: 0 0 20px;
-}
+
 
 .heading {
-  font-size: 36px;
+  font-size: clamp(30px, 4.5vw, 56px);
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.05;
   text-transform: uppercase;
   color: #fff;
-  margin: 0 0 28px;
+  margin: 0 0 24px;
 }
 
 .description {
   font-family: "Mona-Sans Regular", sans-serif;
-  font-size: 18px;
+  font-size: clamp(15px, 1.4vw, 22px);
   font-weight: 100;
   line-height: 1.35;
   text-transform: uppercase;
   color: rgb(148, 163, 184);
-  margin: 0 0 24px;
+  margin: 0;
+}
+
+.headerRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 /* ============================================
-   MARQUEE
+   MARQUEE — سكرول تلقائي لانهائي
 ============================================ */
 .marquee {
   overflow: hidden;
   position: relative;
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 6%,
-    #000 94%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 6%,
-    #000 94%,
-    transparent 100%
-  );
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 4px 24px 0;
+  box-sizing: border-box;
 }
-
-.marquee::before { display: none; }
-.marquee::after  { display: none; }
 
 .track {
   display: flex;
-  gap: 12px;
+  gap: clamp(20px, 3vw, 56px);
   width: max-content;
-  animation: scrollLeft 70s linear infinite;
-  will-change: transform;
+  animation: scrollLeft 40s linear infinite;
 }
 
-@media (hover: hover) {
-  .marquee:hover .track {
-    animation-play-state: paused;
-  }
+.track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .col {
@@ -180,9 +188,44 @@
   flex-shrink: 0;
 }
 
-@keyframes scrollLeft {
+@keyframes scrollRight {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(50%); }
+}
+
+.trackRtl {
+  display: flex;
+  gap: clamp(20px, 3vw, 56px);
+  width: max-content;
+  animation: scrollRight 40s linear infinite;
+}
+
+.trackRtl:hover {
+  animation-play-state: paused;
+}
+
+.loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 8, 34, 0.85);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ============================================
@@ -198,6 +241,7 @@
   background: #010822;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  margin-top: auto;
 }
 
 .footerText {
@@ -212,107 +256,35 @@
    RESPONSIVE
 ============================================ */
 
-/* Tablet (769–1024) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .layout      { padding: 48px 24px 24px 24px; gap: 40px; }
-  .heading     { font-size: 36px; }
-  .description { font-size: 18px; margin-bottom: 24px; }
-  .marquee     { margin: 0 -24px; width: calc(100% + 48px); }
-  .footer      { padding: 12px 24px; }
-  .footerText  { font-size: 12px; }
-}
-
 /* Mobile (≤768) */
+
+
 @media (max-width: 768px) {
-  .header      { padding: 12px 16px; }
+  .headerInner { padding: 0 16px; }
   .logo        { width: 90px; }
-  .lang        { padding: 6px 18px; font-size: 12px; }
-  .icon i      { width: 22px; }
-  .layout      { padding: 40px 16px 16px 16px; gap: 36px; }
-  .heading     { font-size: 30px; line-height: 1.1; margin-bottom: 18px; }
-  .description { font-size: 16px; }
-  .eyebrow     { font-size: 10px; letter-spacing: 3px; margin-bottom: 14px; }
+  .right       { gap: 8px; }
+  .lang        { padding: 6px 16px; font-size: 12px; }
+  .loginBtn    { padding: 6px 18px; font-size: 12px; }
   .marquee     { margin: 0 -16px; width: calc(100% + 32px); }
-  .track       { animation-duration: 40s; gap: 8px; }
-  .col         { gap: 8px; }
+  .track       { animation-duration: 30s; }
+  .trackRtl    { animation-duration: 30s; }
   .footer      { padding: 12px 16px; }
   .footerText  { font-size: 11px; }
 }
 
-/* Desktop (≥1025) — عمودين */
-@media (min-width: 1025px) {
-  .layout {
-    grid-template-columns: 1fr 1.6fr;
-    padding: 64px 0 64px 48px;
-    gap: 0;
-  }
-  .left {
-    padding-right: 32px;
-    max-width: 520px;
-  }
-  .heading     { font-size: 48px; }
-  .description { font-size: 24px; margin-bottom: 40px; }
-  .marquee {
-    margin-left: -96px;
-    padding-left: 96px;
-    width: auto;
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      #000 46%,
-      #000 88%,
-      transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      #000 46%,
-      #000 88%,
-      transparent 100%
-    );
-  }
-  .marquee::before {
-    content: "";
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(to right, var(--page-bg) 0%, transparent 46%);
-  }
-  .marquee::after {
-    content: "";
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      var(--page-bg) 0%,
-      transparent 6%,
-      transparent 94%,
-      var(--page-bg) 100%
-    );
-    opacity: 0.45;
-  }
-}
 
-/* Laptop (1025–1199) */
-@media (min-width: 1025px) and (max-width: 1199px) {
-  .header      { padding: 16px 32px; }
-  .layout      { grid-template-columns: 1fr 1.5fr; padding: 64px 0 56px 32px; }
-  .marquee     { margin-left: -64px; padding-left: 64px; }
-  .heading     { font-size: 42px; }
-  .description { font-size: 20px; }
-  .footer      { padding: 16px 32px; }
-}
+@media (max-width: 400px) {
+  .logo {
+    width: 75px;
+  }
 
-/* Large desktop (≥1400) */
-@media (min-width: 1400px) {
-  .header      { padding: 24px 80px; }
-  .layout      { grid-template-columns: 1fr 1.8fr; padding: 24px 0 80px 80px; }
-  .marquee     { margin-left: -120px; padding-left: 120px; }
-  .heading     { font-size: 64px; }
-  .description { font-size: 26px; }
+  .lang {
+    padding: 5px 12px;
+    font-size: 11px;
+  }
+
+  .loginBtn {
+    padding: 5px 14px;
+    font-size: 11px;
+  }
 }
