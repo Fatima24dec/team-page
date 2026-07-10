@@ -21,7 +21,7 @@ export default function TeamCard({ name, title, bio, photo }: TeamCardProps) {
   return (
     <div className={styles.card}>
       <div className={styles.avatarWrap}>
-        <img src="/images/ID.svg" className={styles.figmaBg} alt="ID" />
+
 
         {photo ? (
           <img src={photo} alt={name} className={styles.photo} />

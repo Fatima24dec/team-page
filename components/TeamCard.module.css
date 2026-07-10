@@ -54,7 +54,7 @@
   z-index: 1;
   font-size: 44px;
   font-weight: 700;
-  color: #d66e6e;
+  color: #6ea7d68c;
 }
 
 /* تدرج أزرق خفيف بأسفل الصورة فقط */
@@ -99,16 +99,16 @@
 
 .role {
   font-family: "Mona-Sans Regular", sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color:  rgba(255,255,255,0.6);;
+  font-size: 12px;
+  font-weight: 700;
+  color:  #94a3b8;
   margin: 0 0 10px;
 }
 
 .bio {
   font-family: "Mona-Sans Regular", sans-serif;
-  font-size: 11.5px;
-  color: #cfc6c6ec;
+  font-size: 10.5px;
+  color: #fff;
   line-height: 1.6;
   margin: 0;
 }

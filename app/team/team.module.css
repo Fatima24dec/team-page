@@ -21,10 +21,8 @@
   box-sizing: border-box;
   position: relative;
   z-index: 10;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: #010822;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .headerInner {
@@ -40,12 +38,13 @@
 .logo {
   width: 120px;
   height: auto;
+  display: block;
 }
 
 .right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .lang {
@@ -64,31 +63,16 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.icon {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.icon i {
-  width: 26px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  display: block;
-}
-
-/* زر Login */
 .loginBtn {
   padding: 8px 24px;
-  border: none;
-  font-family: 'mona-sans regular', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50px;
   background: #fff;
   color: #010822;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
+  font-family: inherit;
   transition: opacity 0.2s;
 }
 
@@ -124,7 +108,39 @@
    LEFT (TEXT)
 ============================================ */
 
+.marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 4px 24px 0;
+  box-sizing: border-box;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
 
+.btnSpinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(1, 8, 34, 0.3);
+  border-top-color: #010822;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+}
 
 .heading {
   font-size: clamp(30px, 4.5vw, 56px);
@@ -256,10 +272,18 @@
    RESPONSIVE
 ============================================ */
 
-/* Mobile (≤768) */
-
-
 @media (max-width: 768px) {
+
+  .layout{
+    padding-top: 28px;
+    padding-bottom: 24px;
+    gap: 18px;
+  }
+
+  .heading{
+    margin-bottom:10px;
+  }
+
   .headerInner { padding: 0 16px; }
   .logo        { width: 90px; }
   .right       { gap: 8px; }
@@ -272,19 +296,32 @@
   .footerText  { font-size: 11px; }
 }
 
-
-@media (max-width: 400px) {
-  .logo {
-    width: 75px;
+@media (max-width: 1024px) {
+  .layout {
+    padding-top: 36px;
+    padding-bottom: 32px;
+    gap: 22px;
   }
 
-  .lang {
-    padding: 5px 12px;
-    font-size: 11px;
+  .heading {
+    margin-bottom: 10px;
   }
 
-  .loginBtn {
-    padding: 5px 14px;
-    font-size: 11px;
+  .description {
+    margin-bottom: 0;
   }
 }
+
+
+@media (max-width: 1440px) {
+  .layout {
+    padding-top: 80px;
+    padding-bottom: 70px;
+    gap: 50px;
+  }
+
+  .heading {
+    margin-bottom: 30px;
+  }
+}
+

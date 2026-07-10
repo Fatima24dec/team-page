@@ -1,12 +1,10 @@
 "use client";
 
-
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useTransition, useEffect, useState } from "react";
 import TeamCard from "@/components/TeamCard";
 import styles from "./team.module.css";
-import {useEffect, useState} from 'react';
 import { teamService } from "@/services/team";
 
 type Member = {
@@ -23,9 +21,10 @@ export default function TeamPage() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [switching, setSwitching] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [members, setMembers] = useState<Member[]>([]);
 
-const [members, setMembers] = useState<Member[]>([]);
-const loopMembers = [...members, ...members];
+  const loopMembers = [...members, ...members];
 
   async function switchLocale() {
     setSwitching(true);
@@ -40,29 +39,42 @@ const loopMembers = [...members, ...members];
       setSwitching(false);
     });
   }
-useEffect(() => {
-  const fetchTeams = async () => {
-    try {
-      const response = await teamService.getTeams();
-      setMembers(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  fetchTeams();
-}, []);
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+        const response = await teamService.getTeams();
+        setMembers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchTeams();
+  }, []);
+
+  function handleLogin() {
+    setLoginLoading(true);
+    window.location.href = "http://localhost:8000/login";
+  }
+
   return (
     <main className={styles.main} dir={locale === "ar" ? "rtl" : "ltr"}>
 
-      {/* Loading Overlay */}
+      {/* Loading Overlay - تبديل اللغة */}
       {switching && (
         <div className={styles.loadingOverlay}>
           <div className={styles.spinner}></div>
         </div>
       )}
 
-{/* HEADER */}
+      {/* Loading Overlay - الانتقال للـ Login */}
+      {loginLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.spinner}></div>
+        </div>
+      )}
+
+      {/* HEADER */}
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <img
@@ -70,20 +82,24 @@ useEffect(() => {
             alt="6Degrees Logo"
             className={styles.logo}
           />
-
           <div className={styles.right}>
             <button
               className={styles.lang}
               onClick={switchLocale}
-              disabled={isPending || switching}
+              disabled={isPending || switching || loginLoading}
             >
               {t("nav.lang")}
             </button>
             <button
               className={styles.loginBtn}
-              onClick={() => router.push("http://localhost:8000/login")}
+              onClick={handleLogin}
+              disabled={loginLoading}
             >
-              {t("nav.login")}
+              {loginLoading ? (
+                <span className={styles.btnSpinner}></span>
+              ) : (
+                t("nav.login")
+              )}
             </button>
           </div>
         </div>
@@ -92,24 +108,23 @@ useEffect(() => {
       {/* CONTENT */}
       <div className={styles.layout}>
         <div className={styles.left}>
-
           <h1 className={styles.heading}>{t("hero.heading")}</h1>
           <p className={styles.description}>{t("hero.description")}</p>
         </div>
 
-<div className={styles.marquee}>
-  <div className={locale === "ar" ? styles.trackRtl : styles.track}>
-{loopMembers.map((m, i) => (
-  <TeamCard
-    key={`${m.id}-${i}`}
-    name={m.name}
-    title={m.position}
-    bio={m.bio}
-    photo={m.photo}
-  />
-))}
-  </div>
-</div>
+        <div dir="ltr" className={styles.marquee}>
+          <div className={styles.track}>
+            {loopMembers.map((m, i) => (
+              <TeamCard
+                key={`${m.id}-${i}`}
+                name={m.name}
+                title={m.position}
+                bio={m.bio}
+                photo={m.photo}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* FOOTER */}
