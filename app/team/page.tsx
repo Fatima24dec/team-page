@@ -1,9 +1,9 @@
 "use client";
 
+
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import teamMembers from "@/data/team.json";
 import TeamCard from "@/components/TeamCard";
 import styles from "./team.module.css";
 import {useEffect, useState} from 'react';
@@ -12,7 +12,7 @@ import { teamService } from "@/services/team";
 type Member = {
   id: number;
   name: string;
-  title: string;
+  position: string;
   bio: string;
   photo: string | null;
 };
@@ -24,8 +24,8 @@ export default function TeamPage() {
   const [isPending, startTransition] = useTransition();
   const [switching, setSwitching] = useState(false);
 
-  const members = teamMembers as Member[];
-  const loopMembers = [...members, ...members];
+const [members, setMembers] = useState<Member[]>([]);
+const loopMembers = [...members, ...members];
 
   async function switchLocale() {
     setSwitching(true);
@@ -41,16 +41,16 @@ export default function TeamPage() {
     });
   }
 useEffect(() => {
-    const fetchTeams = async () => {
-        try {
-            const response = await teamService.getTeams();
-            console.log(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+  const fetchTeams = async () => {
+    try {
+      const response = await teamService.getTeams();
+      setMembers(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    fetchTeams();
+  fetchTeams();
 }, []);
   return (
     <main className={styles.main} dir={locale === "ar" ? "rtl" : "ltr"}>
@@ -97,19 +97,19 @@ useEffect(() => {
           <p className={styles.description}>{t("hero.description")}</p>
         </div>
 
-        <div className={styles.marquee}>
-          <div className={locale === "ar" ? styles.trackRtl : styles.track}>
-            {loopMembers.map((m, i) => (
-              <TeamCard
-                key={`${m.id}-${i}`}
-                name={m.name}
-                title={m.title}
-                bio={m.bio}
-                photo={m.photo}
-              />
-            ))}
-          </div>
-        </div>
+<div className={styles.marquee}>
+  <div className={locale === "ar" ? styles.trackRtl : styles.track}>
+{loopMembers.map((m, i) => (
+  <TeamCard
+    key={`${m.id}-${i}`}
+    name={m.name}
+    title={m.position}
+    bio={m.bio}
+    photo={m.photo}
+  />
+))}
+  </div>
+</div>
       </div>
 
       {/* FOOTER */}
