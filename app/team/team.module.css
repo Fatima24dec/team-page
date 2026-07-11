@@ -252,7 +252,7 @@
   align-items: center;
   justify-content: center;
   padding: 14px 48px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top:  1px solid rgba(255, 255, 255, 0.1);
   box-sizing: border-box;
   background: #010822;
   backdrop-filter: blur(12px);

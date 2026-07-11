@@ -40,6 +40,7 @@ export default function TeamPage() {
     });
   }
 
+
   useEffect(() => {
     const fetchTeams = async () => {
       try {
@@ -51,6 +52,14 @@ export default function TeamPage() {
     };
     fetchTeams();
   }, []);
+
+const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
+
+useEffect(() => {
+  const move = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
+  window.addEventListener("mousemove", move);
+  return () => window.removeEventListener("mousemove", move);
+}, []);
 
   function handleLogin() {
     setLoginLoading(true);
@@ -127,10 +136,30 @@ export default function TeamPage() {
         </div>
       </div>
 
+
+{/* النقطة البيضاء تتبع الماوس */}
+<div
+  style={{
+    position: "fixed",
+    top: mousePos.y,
+    left: mousePos.x,
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    background: "#fff",
+    pointerEvents: "none",
+    zIndex: 99999,
+    transform: "translate(-50%, -50%)",
+    transition: "top 0.05s linear, left 0.05s linear",
+  }}
+/>
+
       {/* FOOTER */}
       <footer className={styles.footer}>
         <p className={styles.footerText}>{t("footer.text")}</p>
       </footer>
+
+
 
     </main>
   );
