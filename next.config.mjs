@@ -4,7 +4,8 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
   output: 'export',
-  turbopack: {},
+  basePath: '/team-page',
+  images: { unoptimized: true },
 };
 
 export default withNextIntl(nextConfig);
