@@ -7,7 +7,6 @@
   width: 100%;
   background: var(--page-bg);
   color: #fff;
-  overflow-x: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -19,10 +18,15 @@
 .header {
   padding: 20px 0;
   box-sizing: border-box;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #010822;
+  background: rgba(1, 8, 34, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .headerInner {
@@ -103,6 +107,7 @@
   gap: clamp(40px, 6vw, 72px);
   box-sizing: border-box;
   align-items: flex-start; /* أضيفي هذا */
+  padding-top: calc(clamp(48px, 8vw, 96px) + 72px);
 }
 /* ============================================
    LEFT (TEXT)
