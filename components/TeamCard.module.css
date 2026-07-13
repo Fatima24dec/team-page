@@ -125,7 +125,8 @@
 
   width: 100%; }
   .initials { font-size: 26px; }
-  .name { font-size: 12px; }
-  .role { font-size: 9px; }
-  .bio { font-size: 9px; }
+  .name { font-size: 18px; }
+  .role { font-size: 14px; }
+  .bio {   font-size: 13px;
+  line-height: 1.6; }
 }

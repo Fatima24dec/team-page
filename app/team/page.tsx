@@ -56,6 +56,8 @@ const loopMembers = isMobile ? members : [...members, ...members];
   }, []);
 
 useEffect(() => {
+  if (window.innerWidth <= 768) return;
+
   const dot = document.createElement("div");
 
   dot.style.position = "fixed";

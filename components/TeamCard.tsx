@@ -23,15 +23,11 @@ export default function TeamCard({ name, title, bio, photo }: TeamCardProps) {
       <div className={styles.avatarWrap}>
 
 
-      {photo ? (
-  <img 
-    src={photo.startsWith('http') ? photo : `${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${photo}`} 
-    alt={name} 
-    className={styles.photo} 
-  />
-) : (
-  <span className={styles.initials}>{getInitials(name)}</span>
-)}
+        {photo ? (
+          <img src={photo} alt={name} className={styles.photo} />
+        ) : (
+          <span className={styles.initials}>{getInitials(name)}</span>
+        )}
       </div>
 
       <div className={styles.info}>
