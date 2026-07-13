@@ -283,6 +283,26 @@
 
 @media (max-width: 768px) {
 
+    .headerInner {
+    padding: 0 16px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .lang {
+    padding: 6px 16px;
+    font-size: 12px;
+  }
+
+  .loginBtn {
+    padding: 6px 18px;
+    font-size: 12px;
+    min-width: auto;
+    white-space: nowrap;
+  }
+
   .layout {
     padding-top: 100px;
     padding-bottom: 32px;
