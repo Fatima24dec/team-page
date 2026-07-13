@@ -40,7 +40,6 @@ export default function TeamPage() {
     });
   }
 
-
   useEffect(() => {
     const fetchTeams = async () => {
       try {
@@ -53,31 +52,20 @@ export default function TeamPage() {
     fetchTeams();
   }, []);
 
-const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
-
-useEffect(() => {
-  const move = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
-  window.addEventListener("mousemove", move);
-  return () => window.removeEventListener("mousemove", move);
-}, []);
-
   function handleLogin() {
     setLoginLoading(true);
-    window.location.href = "http://localhost:8000/login";
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+    console.log("Going to:", `${backendUrl}/login`);
+    setTimeout(() => {
+      window.location.href = `${backendUrl}/login`;
+    }, 800);
   }
 
   return (
     <main className={styles.main} dir={locale === "ar" ? "rtl" : "ltr"}>
 
-      {/* Loading Overlay - تبديل اللغة */}
-      {switching && (
-        <div className={styles.loadingOverlay}>
-          <div className={styles.spinner}></div>
-        </div>
-      )}
-
-      {/* Loading Overlay - الانتقال للـ Login */}
-      {loginLoading && (
+      {/* Loading Overlay */}
+      {(switching || loginLoading) && (
         <div className={styles.loadingOverlay}>
           <div className={styles.spinner}></div>
         </div>
@@ -136,30 +124,10 @@ useEffect(() => {
         </div>
       </div>
 
-
-{/* النقطة البيضاء تتبع الماوس */}
-<div
-  style={{
-    position: "fixed",
-    top: mousePos.y,
-    left: mousePos.x,
-    width: 8,
-    height: 8,
-    borderRadius: "50%",
-    background: "#fff",
-    pointerEvents: "none",
-    zIndex: 99999,
-    transform: "translate(-50%, -50%)",
-    transition: "top 0.05s linear, left 0.05s linear",
-  }}
-/>
-
       {/* FOOTER */}
       <footer className={styles.footer}>
         <p className={styles.footerText}>{t("footer.text")}</p>
       </footer>
-
-
 
     </main>
   );

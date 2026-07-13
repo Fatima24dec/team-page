@@ -177,14 +177,6 @@
 /* ============================================
    MARQUEE — سكرول تلقائي لانهائي
 ============================================ */
-.marquee {
-  overflow: hidden;
-  position: relative;
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 4px 24px 0;
-  box-sizing: border-box;
-}
 
 .track {
   display: flex;
@@ -277,56 +269,19 @@
    RESPONSIVE
 ============================================ */
 
-@media (max-width: 768px) {
-
-  .layout{
-    padding-top: 28px;
-    padding-bottom: 24px;
-    gap: 18px;
-  }
-
-  .heading{
-    margin-bottom:10px;
-  }
-
-  .headerInner { padding: 0 16px; }
-  .logo        { width: 90px; }
-  .right       { gap: 8px; }
-  .lang        { padding: 6px 16px; font-size: 12px; }
-  .loginBtn    { padding: 6px 18px; font-size: 12px; }
-  .marquee     { margin: 0 -16px; width: calc(100% + 32px); }
-  .track       { animation-duration: 30s; }
-  .trackRtl    { animation-duration: 30s; }
-  .footer      { padding: 12px 16px; }
-  .footerText  { font-size: 11px; }
-}
-
 @media (max-width: 1024px) {
   .layout {
-    padding-top: 36px;
+    padding-top: 110px;
     padding-bottom: 32px;
     gap: 22px;
   }
-
-  .heading {
-    margin-bottom: 10px;
-  }
-
-  .description {
-    margin-bottom: 0;
-  }
 }
 
-
-@media (max-width: 1440px) {
+@media (max-width: 768px) {
   .layout {
-    padding-top: 80px;
-    padding-bottom: 70px;
-    gap: 50px;
-  }
-
-  .heading {
-    margin-bottom: 30px;
+    padding-top: 100px;
+    padding-bottom: 24px;
+    gap: 18px;
   }
 }
 
