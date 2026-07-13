@@ -24,7 +24,10 @@ export default function TeamPage() {
   const [loginLoading, setLoginLoading] = useState(false);
   const [members, setMembers] = useState<Member[]>([]);
 
-  const loopMembers = [...members, ...members];
+ const isMobile =
+  typeof window !== "undefined" && window.innerWidth <= 768;
+
+const loopMembers = isMobile ? members : [...members, ...members];
 
   async function switchLocale() {
     setSwitching(true);
@@ -51,6 +54,33 @@ export default function TeamPage() {
     };
     fetchTeams();
   }, []);
+
+useEffect(() => {
+  const dot = document.createElement("div");
+
+  dot.style.position = "fixed";
+  dot.style.width = "10px";
+  dot.style.height = "10px";
+  dot.style.background = "#fff";
+  dot.style.borderRadius = "50%";
+  dot.style.pointerEvents = "none";
+  dot.style.zIndex = "99999";
+  dot.style.transform = "translate(-50%, -50%)";
+
+  document.body.appendChild(dot);
+
+  const move = (e: MouseEvent) => {
+    dot.style.left = `${e.clientX}px`;
+    dot.style.top = `${e.clientY}px`;
+  };
+
+  window.addEventListener("mousemove", move);
+
+  return () => {
+    window.removeEventListener("mousemove", move);
+    document.body.removeChild(dot);
+  };
+}, []);
 
   function handleLogin() {
     setLoginLoading(true);
