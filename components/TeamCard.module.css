@@ -120,7 +120,10 @@
 }
 
 @media (max-width: 767px) {
-  .card { --card-w: 140px; --photo-h: 165px; }
+  .card {   --card-w: min(320px, 100%);
+  --photo-h: 260px;
+
+  width: 100%; }
   .initials { font-size: 26px; }
   .name { font-size: 12px; }
   .role { font-size: 9px; }
