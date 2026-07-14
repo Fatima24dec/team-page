@@ -124,8 +124,7 @@
   --photo-h: 260px;
 
   width: 100%; }
-  .initials { font-size: 48px; }
-  .card { --card-w: 140px; --photo-h: 165px; }
+  .initials { font-size: 26px; }
   .name { font-size: 18px; }
   .role { font-size: 14px; }
   .bio {   font-size: 13px;
